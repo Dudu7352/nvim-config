@@ -1,6 +1,7 @@
 :set tabstop=4
 :set shiftwidth=4
 :set expandtab
+:set number
 
 call plug#begin()
 
@@ -13,6 +14,6 @@ Plug 'folke/tokyonight.nvim', {'branch': 'main'}
 
 call plug#end()
 
-colorscheme tokyonight-night
+colorscheme onedark
 
 :source ~/.config/nvim/tree.lua
