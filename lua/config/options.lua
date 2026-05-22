@@ -19,7 +19,30 @@ local function toggle_format_on_save()
 	end
 end
 
-vim.g.tab_len = 2
+local tab_len_state_path = vim.fn.stdpath("state") .. "/tab_len.txt"
+
+local function load_tab_len(default_len)
+	local ok, lines = pcall(vim.fn.readfile, tab_len_state_path)
+	if ok and lines and lines[1] then
+		local value = tonumber(lines[1])
+		if value and value > 0 then
+			return value
+		end
+	end
+	return default_len
+end
+
+local function save_tab_len(len)
+	pcall(vim.fn.writefile, { tostring(len) }, tab_len_state_path)
+end
+
+local function apply_tab_len(len)
+	vim.o.tabstop = len
+	vim.o.softtabstop = len
+	vim.o.shiftwidth = len
+end
+
+vim.g.tab_len = load_tab_len(2)
 local function toggle_tab_len(log_change)
 	-- local tab_len = 8
 	-- local short_tab = 4
@@ -29,15 +52,14 @@ local function toggle_tab_len(log_change)
 	if vim.g.tab_len == 16 then
 		vim.g.tab_len = 2
 	end
-	vim.o.tabstop = vim.g.tab_len
-	vim.o.softtabstop = vim.g.tab_len
-	vim.o.shiftwidth = vim.g.tab_len
+	apply_tab_len(vim.g.tab_len)
+	save_tab_len(vim.g.tab_len)
 	if log_change then
 		print("Tab toggled to: " .. vim.g.tab_len)
 	end
 end
 
-toggle_tab_len(false)
+apply_tab_len(vim.g.tab_len)
 
 vim.keymap.set({ "n" }, "<leader>cr", vim.lsp.buf.rename)
 vim.keymap.set({ "n" }, "gd", vim.lsp.buf.definition)
@@ -52,7 +74,7 @@ vim.keymap.set({ "n", "v" }, "<leader>ch", ":LspClangdSwitchSourceHeader<cr>")
 -- vim.keymap.set({ "n", "v" }, "<leader>pe", "<cmd>Ex<cr>")
 
 vim.lsp.enable({
-	"lua_ls", "pyright", "clangd", "cmake", "docker_language_service"
+	"lua_ls", "pyright", "clangd", "cmake", "docker_language_service", "rust_analyzer"
 })
 
 -- Source - https://stackoverflow.com/a
