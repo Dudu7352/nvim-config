@@ -74,7 +74,7 @@ vim.keymap.set({ "n", "v" }, "<leader>ch", ":LspClangdSwitchSourceHeader<cr>")
 -- vim.keymap.set({ "n", "v" }, "<leader>pe", "<cmd>Ex<cr>")
 
 vim.lsp.enable({
-	"lua_ls", "pyright", "clangd", "cmake", "docker_language_service", "rust_analyzer"
+	"lua_ls", "pyright", "clangd", "cmake", "docker_language_service", "rust_analyzer", "gopls"
 })
 
 -- Source - https://stackoverflow.com/a

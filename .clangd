@@ -1,0 +1,6 @@
+# Default clangd configuration. Adjust per-project as needed.
+CompileFlags:
+  Add:
+    - -Wall
+    - -Wextra
+    - -Wpedantic
