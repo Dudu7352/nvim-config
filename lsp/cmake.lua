@@ -1,4 +1,5 @@
----@brief
+---@brief copied from https://github.com/neovim/nvim-lspconfig
+---
 ---
 --- https://github.com/neocmakelsp/neocmakelsp
 ---

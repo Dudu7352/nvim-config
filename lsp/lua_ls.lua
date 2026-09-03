@@ -1,4 +1,4 @@
----@brief
+---@brief copied from https://github.com/neovim/nvim-lspconfig
 ---
 --- https://github.com/luals/lua-language-server
 ---
